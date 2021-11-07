@@ -11,51 +11,40 @@ public class DatabaseGroup3 {
     static Connection conn = null;
     static Statement stmt = null;
 
-
-    public static void insertExample() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the brand name of the bag: ");
-        String brand = input.next();
-        System.out.println("Enter the type of the bag: ");
-        String type = input.next();
-        System.out.println("Enter the material of the bag: ");
-        String material = input.next();
-        System.out.println("Enter the colour of the bag: ");
-        String colour = input.next();
-    }
-
-
     public static void insertWithValue(String brand, String type, String material,
                                        String colour) throws SQLException {
 
 
         String sql = "INSERT INTO Bags(Brand,Type,Material,Colour) VALUES ('" + brand + "','" + type + "','" + material + "','" + colour + "')";
-        //  System.out.println("Inserted: " + stmt.execute(sql));
+
         stmt.execute(sql);
     }
 
     public static void main(String[] args) {
         try {
-            //Return connection instance
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("Creating statement...");
 
-            //Create statement object
             stmt = conn.createStatement();
 
             Scanner input = new Scanner(System.in);
-            System.out.println("Enter the brand name of the bag: ");
-            String brand = input.next();
-            System.out.println("Enter the type of the bag: ");
-            String type = input.next();
-            System.out.println("Enter the material of the bag: ");
-            String material = input.next();
-            System.out.println("Enter the colour of the bag: ");
-            String colour = input.next();
+            String continuation;
+            do {
+                System.out.println("Enter the brand name of the bag: ");
+                String brand = input.next();
+                System.out.println("Enter the type of the bag: ");
+                String type = input.next();
+                System.out.println("Enter the material of the bag: ");
+                String material = input.next();
+                System.out.println("Enter the colour of the bag: ");
+                String colour = input.next();
+                System.out.println("Would you like to enter another bag into database? y/n");
+                continuation = input.next();
 
+                insertWithValue(brand, type, material, colour);
 
-            insertWithValue(brand, type, material, colour);
+            }while (continuation.equalsIgnoreCase("y"));
 
         } catch (SQLException sqlException) {
             System.out.println("Error:" + sqlException.getMessage());
@@ -67,7 +56,5 @@ public class DatabaseGroup3 {
 
             }
         }
+        }
     }
-
-
-}
