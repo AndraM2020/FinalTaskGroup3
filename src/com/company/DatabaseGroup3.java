@@ -11,26 +11,12 @@ public class DatabaseGroup3 {
     static Connection conn = null;
     static Statement stmt = null;
 
-
-    public static void insertExample() throws SQLException {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the brand name of the bag: ");
-        String brand = input.next();
-        System.out.println("Enter the type of the bag: ");
-        String type = input.next();
-        System.out.println("Enter the material of the bag: ");
-        String material = input.next();
-        System.out.println("Enter the colour of the bag: ");
-        String colour = input.next();
-    }
-
-
     public static void insertWithValue(String brand, String type, String material,
                                        String colour) throws SQLException {
 
 
         String sql = "INSERT INTO Bags(Brand,Type,Material,Colour) VALUES ('" + brand + "','" + type + "','" + material + "','" + colour + "')";
-        //  System.out.println("Inserted: " + stmt.execute(sql));
+
         stmt.execute(sql);
     }
 
